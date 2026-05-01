@@ -1,0 +1,132 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.modal-content {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(10, 10, 12, 0.95);
+  border-radius: 20px;
+  padding: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  font-size: 2.5rem;
+  color: var(--text-gray);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+  color: var(--primary-green);
+}
+
+.modal-header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 1.5rem;
+}
+
+.green-glow {
+  color: var(--primary-green);
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.player-role-badge {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.stat-label {
+  font-size: 0.7rem;
+  color: #666;
+  letter-spacing: 2px;
+}
+
+.stat-value {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--primary-green);
+}
+
+.achievements-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-white);
+  letter-spacing: 3px;
+}
+
+.achievements-section ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.achievements-section li {
+  color: var(--text-gray);
+  font-size: 0.95rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.achievements-section li::before {
+  content: '>';
+  position: absolute;
+  left: 0;
+  color: var(--primary-green);
+}
+
+.modal-footer {
+  margin-top: 3.5rem;
+}
+
+.tactical-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-green) 0%, transparent 100%);
+  margin-bottom: 1rem;
+}
+
+.tactical-footer {
+  font-size: 0.65rem;
+  color: #444;
+  letter-spacing: 4px;
+}
+
+.border-glow-green {
+  border: 1px solid var(--primary-green);
+  box-shadow: 0 0 20px var(--green-glow);
+}

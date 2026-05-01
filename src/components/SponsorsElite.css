@@ -1,0 +1,554 @@
+/* =================== SPONSORS SECTION =================== */
+.sponsors-elite-section {
+  width: 100%;
+}
+
+.sponsors-elite-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+  gap: 4rem;
+  align-items: center;
+}
+
+/* Sponsors Column */
+.sponsors-column {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.official-badge {
+  display: inline-block;
+  align-self: flex-start;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.7rem;
+  background: rgba(230, 0, 0, 0.1);
+  border-radius: 50px;
+}
+
+.sponsor-card {
+  display: flex;
+  gap: 2rem;
+  padding: 2.5rem;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(20, 20, 22, 0.8) 0%, rgba(10, 10, 11, 0.9) 100%);
+  border: 4px solid var(--primary-red);
+  /* Removed dark red glow and hover animation */
+  box-shadow: none;
+  transition: none;
+}
+
+.sponsor-card:hover {
+  /* Removed hover glow */
+  box-shadow: none;
+}
+
+.sponsor-logo-box {
+  width: 100px;
+  height: 100px;
+  min-width: 100px;
+  border: 3px solid var(--primary-red);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partner-logo-img {
+  width: 110%;
+  height: 110%;
+  object-fit: contain;
+}
+
+.sponsor-info h2 {
+  font-size: 2.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.partner-type {
+  font-weight: 800;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+}
+
+.sponsor-desc {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* =================== ELITE COLUMN =================== */
+.elite-column {
+  width: 100%;
+}
+
+.elite-visual {
+  height: 620px;
+  width: 100%;
+  border-radius: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 0;
+}
+
+/* =================== NEON CIRCLE RING =================== */
+.neon-circle-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -52%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 4px solid #e60000;
+  box-shadow:
+    0 0 15px 3px rgba(230, 0, 0, 0.9),
+    0 0 40px 6px rgba(230, 0, 0, 0.5),
+    0 0 90px 12px rgba(230, 0, 0, 0.2),
+    inset 0 0 25px rgba(230, 0, 0, 0.1);
+  z-index: 2;
+  pointer-events: none;
+  display: none;
+}
+
+.neon-circle-ring::after {
+  content: '';
+  position: absolute;
+  inset: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(230, 0, 0, 0.35);
+  box-shadow: 0 0 8px rgba(230, 0, 0, 0.3), inset 0 0 8px rgba(230, 0, 0, 0.1);
+}
+
+@keyframes neonRingPulse {
+
+  0%,
+  100% {
+    box-shadow:
+      0 0 15px 3px rgba(230, 0, 0, 0.9),
+      0 0 40px 6px rgba(230, 0, 0, 0.5),
+      0 0 90px 12px rgba(230, 0, 0, 0.2),
+      inset 0 0 25px rgba(230, 0, 0, 0.1);
+  }
+
+  50% {
+    box-shadow:
+      0 0 22px 5px rgba(230, 0, 0, 1),
+      0 0 60px 10px rgba(230, 0, 0, 0.7),
+      0 0 130px 20px rgba(230, 0, 0, 0.3),
+      inset 0 0 35px rgba(230, 0, 0, 0.2);
+  }
+}
+
+/* =================== VERTICAL NEON PILLARS =================== */
+.neon-pillar {
+  position: absolute;
+  width: 3px;
+  bottom: 80px;
+  border-radius: 3px 3px 0 0;
+  background: linear-gradient(to top,
+      rgba(230, 0, 0, 1) 0%,
+      rgba(230, 0, 0, 0.8) 60%,
+      rgba(230, 0, 0, 0.2) 100%);
+  box-shadow:
+    0 0 8px rgba(230, 0, 0, 0.9),
+    0 0 18px rgba(230, 0, 0, 0.5),
+    0 0 35px rgba(230, 0, 0, 0.2);
+  z-index: 2;
+  pointer-events: none;
+  display: none;
+}
+
+.pillar-l-1 {
+  left: 10%;
+  height: 60%;
+}
+
+.pillar-l-2 {
+  left: 22%;
+  height: 40%;
+  animation-delay: 0.5s;
+}
+
+.pillar-r-1 {
+  right: 10%;
+  height: 60%;
+  animation-delay: 0.2s;
+}
+
+.pillar-r-2 {
+  right: 22%;
+  height: 40%;
+  animation-delay: 0.7s;
+}
+
+@keyframes pillarFlicker {
+
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+
+  92% {
+    opacity: 0.7;
+  }
+
+  94% {
+    opacity: 1;
+  }
+
+  96% {
+    opacity: 0.8;
+  }
+}
+
+/* =================== JERSEY LABEL =================== */
+.jersey-showcase-label {
+  position: relative;
+  z-index: 10;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  color: var(--text-gray);
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.label-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--primary-red);
+  box-shadow: 0 0 8px var(--primary-red);
+}
+
+/* =================== JERSEY + STAGE COMBINED ZONE =================== */
+.jersey-stage-zone {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  width: 100%;
+  justify-content: flex-end;
+  overflow: hidden;
+  border-radius: 20px;
+}
+
+.stage-background-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.8;
+  z-index: 1;
+}
+
+.stage-spotlight-overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 40%, transparent 20%, rgba(0, 0, 0, 0.4) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* =================== JERSEY SHOWCASE =================== */
+.jersey-flip-container {
+  position: relative;
+  z-index: 10;
+  width: 280px;
+  height: 350px;
+  flex-shrink: 0;
+  margin-bottom: 20px;
+}
+
+.jersey-card {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.jersey-front-card {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.9);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.jersey-back-card {
+  opacity: 0;
+  transform: translateX(60px) scale(0.9);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.show-front .jersey-front-card {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 2;
+  pointer-events: all;
+}
+
+.show-back .jersey-back-card {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  z-index: 2;
+  pointer-events: all;
+}
+
+.show-back .jersey-front-card {
+  opacity: 0;
+  transform: translateX(-60px) scale(0.9);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.show-front .jersey-back-card {
+  opacity: 0;
+  transform: translateX(60px) scale(0.9);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.jersey-side-tag {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  letter-spacing: 3px;
+  color: #000;
+  background: var(--primary-red);
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  border: 1px solid rgba(230, 0, 0, 0.3);
+  white-space: nowrap;
+  z-index: 5;
+  font-weight: 800;
+}
+
+.jersey-img {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  filter: drop-shadow(0 15px 35px rgba(230, 0, 0, 0.5));
+}
+
+.jersey-glow-base {
+  display: none;
+}
+
+.elite-platform-stage {
+  display: none;
+}
+
+/* =================== GAMING STAGE - OCTAGONAL PODIUM =================== */
+.gaming-stage {
+  position: relative;
+  width: 100%;
+  z-index: 5;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.stage-oct-base {
+  position: relative;
+  width: 320px;
+  height: 50px;
+  clip-path: polygon(10% 0%, 90% 0%,
+      100% 25%, 100% 75%,
+      90% 100%, 10% 100%,
+      0% 75%, 0% 25%);
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  border: 2px solid #e60000;
+  box-shadow: 0 0 20px rgba(230, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stage-oct-inner {
+  width: 240px;
+  height: 35px;
+  clip-path: polygon(10% 0%, 90% 0%,
+      100% 25%, 100% 75%,
+      90% 100%, 10% 100%,
+      0% 75%, 0% 25%);
+  background: #000;
+  border: 1px solid rgba(230, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stage-inner-glow-top {
+  width: 70%;
+  height: 2px;
+  background: #e60000;
+  box-shadow: 0 0 10px #e60000;
+}
+
+.stage-top-edge {
+  position: absolute;
+  top: 0;
+  width: 80%;
+  height: 2px;
+  background: #e60000;
+  box-shadow: 0 0 15px #e60000;
+}
+
+.stage-floor-glow {
+  width: 340px;
+  height: 25px;
+  background: radial-gradient(ellipse, rgba(230, 0, 0, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  margin-top: 5px;
+}
+
+/* =================== BOTTOM BAR =================== */
+.elite-bottom-bar {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.8rem 0 0;
+  flex-shrink: 0;
+}
+
+/* =================== FLIP INDICATORS =================== */
+.jersey-indicators {
+  display: flex;
+  gap: 8px;
+}
+
+.indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.indicator-dot.active {
+  background: var(--primary-red);
+  box-shadow: 0 0 8px var(--primary-red);
+  transform: scale(1.3);
+}
+
+/* =================== BRANDING =================== */
+.elite-branding {
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+
+.elite-branding h4 {
+  font-size: 1.1rem;
+  letter-spacing: 5px;
+  margin-bottom: 0.15rem;
+}
+
+.elite-gaming-label {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  letter-spacing: 8px;
+  color: var(--text-gray);
+  opacity: 0.6;
+}
+
+/* =================== RESPONSIVE =================== */
+@media (max-width: 1200px) {
+  .sponsors-elite-grid {
+    gap: 2rem;
+  }
+
+  .sponsor-card {
+    padding: 1.8rem;
+  }
+
+  .sponsor-info h2 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .sponsors-elite-grid {
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+
+  .elite-column {
+    order: -1;
+    /* Show the jersey stage first on mobile */
+  }
+
+  .elite-visual {
+    height: 580px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sponsors-elite-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .sponsor-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 2rem 1.5rem;
+  }
+
+  .elite-visual {
+    height: 520px;
+    padding-top: 1rem;
+  }
+
+  .jersey-flip-container {
+    width: 200px;
+    height: 240px;
+    margin-bottom: -10px;
+  }
+
+  .stage-oct-base {
+    width: 260px;
+    height: 40px;
+  }
+
+  .stage-oct-inner {
+    width: 200px;
+    height: 30px;
+  }
+
+  .neon-circle-ring {
+    width: 260px;
+    height: 260px;
+  }
+
+  .neon-pillar {
+    bottom: 60px;
+  }
+}

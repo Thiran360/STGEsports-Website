@@ -1,0 +1,150 @@
+:root {
+  --bg-dark: #0a0a0b;
+  --bg-card: rgba(20, 20, 22, 0.7);
+  --primary-red: #e60000;
+  --primary-cyan: #00d2ff;
+  --primary-blue: #007aff;
+  --primary-green: #39FF14;
+  --primary-dark-red: #8b0000;
+  --text-white: #ffffff;
+  --text-gray: #a0a0a0;
+  --accent-glow: rgba(255, 59, 48, 0.5);
+  --cyan-glow: rgba(0, 210, 255, 0.4);
+  --green-glow: rgba(57, 255, 20, 0.5);
+  --dark-red-glow: rgba(139, 0, 0, 0.5);
+
+  --font-heading: 'Orbitron', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  font-family: var(--font-body);
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #050505;
+}
+
+#root {
+  width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+.heading-font {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Glassmorphism Utility */
+.glass {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glow Utilities */
+.border-glow-red {
+  box-shadow: 0 0 15px var(--accent-glow);
+  border: 1px solid var(--primary-red);
+}
+
+.border-glow-cyan {
+  box-shadow: 0 0 15px var(--cyan-glow);
+  border: 1px solid var(--primary-cyan);
+}
+
+.border-glow-dark-red {
+  box-shadow: 0 0 15px var(--dark-red-glow);
+  border: 1px solid var(--primary-dark-red);
+}
+
+.border-glow-green {
+  box-shadow: 0 0 15px var(--green-glow);
+  border: 1px solid var(--primary-green);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-red);
+}
+
+/* Global Layout Utilities */
+.stg-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.stg-section {
+  padding: 8rem 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-header h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .stg-section {
+    padding: 5rem 0;
+  }
+}

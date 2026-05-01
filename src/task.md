@@ -1,0 +1,20 @@
+- [ ] **Phase 1: Global Style Transformation**
+    - [ ] Import Michroma and Inter fonts in `index.css`
+    - [ ] Update CSS variables with exact hex codes (#B91C1C, #0B0F1A)
+    - [ ] Refine global glassmorphism and glow utilities
+- [ ] **Phase 2: Hero Section (1:1)**
+    - [ ] Update `Hero.jsx` text and badge
+    - [ ] Implement Framer Motion reveal animations
+    - [ ] Match background image and overlay opacity
+- [ ] **Phase 3: Sponsors & Elite (1:1)**
+    - [ ] Sync MYLUV branding and partner details
+    - [ ] Adjust glowing borders and container alignment
+- [ ] **Phase 4: Metrics Section (1:1)**
+    - [ ] Update data (₹ symbol, 24/7 Live)
+    - [ ] Add counting-up animation
+- [ ] **Phase 5: Features & Interactive Cards (1:1)**
+    - [ ] Sync card text and icons
+    - [ ] Finalize hover interactions
+- [ ] **Phase 6: Final Polish**
+    - [ ] Navbar and Footer consistency
+    - [ ] Mobile responsiveness verification
