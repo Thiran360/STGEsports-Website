@@ -31,9 +31,12 @@
   color: #fff;
 }
 
-.showcase-nav {
+.showcase-nav-bottom {
   display: flex;
-  gap: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .nav-btn {

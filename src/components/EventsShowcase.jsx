@@ -131,14 +131,6 @@ const EventsShowcase = () => {
             <div className="red-bar"></div>
             <h2 className="showcase-title heading-font">PREVIOUS EVENTS SHOWCASE</h2>
           </div>
-          <div className="showcase-nav">
-            <button className="nav-btn prev" onClick={prevEvent}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-            </button>
-            <button className="nav-btn next" onClick={nextEvent}>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-            </button>
-          </div>
         </div>
 
         {/* Main Card */}
@@ -250,6 +242,16 @@ const EventsShowcase = () => {
 
 
           </div>
+        </div>
+
+        {/* Bottom Navigation */}
+        <div className="showcase-nav-bottom">
+          <button className="nav-btn prev" onClick={prevEvent}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          </button>
+          <button className="nav-btn next" onClick={nextEvent}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
         </div>
       </div>
     </section>

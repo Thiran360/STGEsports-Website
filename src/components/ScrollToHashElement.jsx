@@ -15,6 +15,8 @@ const ScrollToHashElement = () => {
           });
         }, 100); // Small delay to ensure page is loaded
       }
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [hash]);
 

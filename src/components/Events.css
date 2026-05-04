@@ -171,4 +171,16 @@
   .carousel-btn {
     display: none;
   }
+  
+  .event-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .event-content h3 {
+    font-size: 2rem;
+  }
+
+  .event-prize {
+    font-size: 0.9rem;
+  }
 }

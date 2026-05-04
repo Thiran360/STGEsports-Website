@@ -1,39 +1,29 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useInView } from 'framer-motion';
+import React, { useEffect, useRef } from 'react';
+import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
 import './Metrics.css';
 
 const Counter = ({ value, suffix = '', prefix = '' }) => {
-  const [count, setCount] = useState(0);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  
-  // Extract number from value string if needed, but easier to pass target directly
-  const target = parseInt(value);
+  const isInView = useInView(ref, { once: false, amount: 0.5 });
+  const count = useMotionValue(0);
+  const rounded = useTransform(count, (latest) => Math.round(latest));
   
   useEffect(() => {
     if (isInView) {
-      let start = 0;
-      const end = target;
-      if (start === end) return;
-
-      let totalDuration = 2000;
-      let incrementTime = (totalDuration / end) > 10 ? (totalDuration / end) : 10;
-      
-      let timer = setInterval(() => {
-        start += Math.ceil(end / 100); // larger steps for higher numbers
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(start);
-        }
-      }, incrementTime);
-
-      return () => clearInterval(timer);
+      const controls = animate(count, value, { duration: 2, ease: "easeOut" });
+      return controls.stop;
+    } else {
+      count.set(0); // Reset when scrolled out of view
     }
-  }, [isInView, target]);
+  }, [isInView, value, count]);
 
-  return <span ref={ref}>{prefix}{count}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {prefix}
+      <motion.span>{rounded}</motion.span>
+      {suffix}
+    </span>
+  );
 };
 
 const metricsData = [

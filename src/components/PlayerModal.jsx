@@ -15,7 +15,7 @@ const PlayerModal = ({ isOpen, onClose, player }) => {
         onClick={onClose}
       >
         <motion.div 
-          className="modal-content glass border-glow-green"
+          className="modal-content glass border-glow-red"
           initial={{ scale: 0.8, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
           exit={{ scale: 0.8, opacity: 0, y: 20 }}
@@ -24,7 +24,7 @@ const PlayerModal = ({ isOpen, onClose, player }) => {
           <button className="close-btn" onClick={onClose}>&times;</button>
           
           <div className="modal-header">
-            <h2 className="heading-font green-glow">{player.name}</h2>
+            <h2 className="heading-font red-glow-text">{player.name}</h2>
             <span className="player-role-badge">{player.role}</span>
           </div>
 

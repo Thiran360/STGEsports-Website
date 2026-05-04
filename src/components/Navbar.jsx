@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import logo from '../assets/stg-logo.png';
 import './Navbar.css';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
+
+  const handleHomeClick = (e) => {
+    closeMenu();
+    if (location.pathname === '/' && !location.hash) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav className={`navbar glass ${isOpen ? 'menu-open' : ''}`}>
@@ -31,27 +39,35 @@ const Navbar = () => {
 
         <ul className={`nav-links ${isOpen ? 'show' : ''}`}>
           <li>
-            <NavLink to="/" onClick={closeMenu} className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+            <NavLink 
+              to="/" 
+              onClick={handleHomeClick} 
+              className={({ isActive }) => (location.pathname === '/' && (location.hash === '' || location.hash === '#') ? 'active glow-red' : '')}
+            >
               HOME
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+            <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/about' ? 'active glow-red' : '')}>
               ABOUT
             </NavLink>
           </li>
           <li>
-            <NavLink to="/lineup" onClick={closeMenu} className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+            <NavLink to="/lineup" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/lineup' ? 'active glow-red' : '')}>
               LINEUP
             </NavLink>
           </li>
           <li>
-            <NavLink to="/events" onClick={closeMenu} className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+            <NavLink to="/events" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/events' ? 'active glow-red' : '')}>
               EVENTS
             </NavLink>
           </li>
           <li>
-            <NavLink to="/#contact" onClick={closeMenu} className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+            <NavLink 
+              to="/#contact" 
+              onClick={closeMenu} 
+              className={() => (location.hash === '#contact' ? 'active glow-red' : '')}
+            >
               CONTACT
             </NavLink>
           </li>

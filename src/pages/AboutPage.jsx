@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import phoenixBg from '../assets/about-phoenix.png';
+import aboutHeroBg from '../assets/about-hero-new.jpeg';
+import phoenixBg from '../assets/mission-bg-new.jpg';
+import jokerBg from '../assets/vision-bg-joker.jpeg';
 import './AboutPage.css';
 
 const AboutPage = () => {
@@ -22,10 +24,10 @@ const AboutPage = () => {
     <div className="about-page">
       {/* Hero Section with Gaming Background */}
       <section className="about-hero">
-        <div className="about-hero-bg" style={{ backgroundImage: `url(${phoenixBg})` }}></div>
+        <div className="about-hero-bg" style={{ backgroundImage: `url(${aboutHeroBg})` }}></div>
         <div className="hero-overlay"></div>
         <div className="stg-container flex-col h-full center-content relative">
-          <button className="back-btn glass" onClick={() => navigate(-1)}>
+          <button className="global-back-btn" onClick={() => navigate(-1)}>
             <span className="arrow">←</span> BACK
           </button>
           
@@ -45,10 +47,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
               transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
             >
-              DO YOU KNOW ABOUT <br />
-              <span className="red-text">
-                STG?
-              </span>
+              OUR <span className="red-text fire-flicker-text">STG ESPORTS</span> PRINCIPLES
             </motion.h1>
           </div>
 
@@ -66,6 +65,22 @@ const AboutPage = () => {
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
+      <section className="mission-vision-section stg-section bg-darker">
+        <div className="stg-container">
+          <div className="mission-grid">
+            <div className="mission-card glass phoenix-card" style={{ backgroundImage: `url(${phoenixBg})` }}>
+              <h3 className="heading-font red-text">OUR MISSION</h3>
+              <p>Like a Phoenix rising from the ashes, our mission is to turn every challenge into a powerful comeback. At STG eSports, we are committed to building resilient players and teams who evolve with every match. Through competitive tournaments, structured opportunities, and a strong community, we empower gamers to rise stronger, sharper, and ready to dominate the esports arena.</p>
+            </div>
+            <div className="mission-card glass phoenix-card" style={{ backgroundImage: `url(${jokerBg})` }}>
+              <h3 className="heading-font red-text">OUR VISION</h3>
+              <p>Strategically unpredictable, remarkably consistent—our vision is inspired by the calculated mindset of the Joker. We aim to stay ahead of the game, adapting to every shift in the esports landscape while delivering seamless and impactful experiences. STG eSports envisions becoming a leading force where innovation meets strategy, creating moments that are unexpected, exciting, and unforgettable.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Philosophical Section */}
       <section className="about-philosophical stg-section">
         <div className="stg-container center">
@@ -74,33 +89,13 @@ const AboutPage = () => {
           </motion.h2>
           
           <motion.div className="philosophy-content" {...fadeIn}>
-            <p className="highlight-text">
-              Just like a <span className="red-text">Phoenix</span> rising from the ashes, STG stands for relentless power and rebirth. 
-              We never stay down, we only burn brighter.
-            </p>
-            
             <div className="desc-block">
-              <p>Strong Ties Gaming (STG) is India's premier community-driven esports platform, dedicated to fostering talent and providing a professional stage for gamers.</p>
-              <p>We bridge the gap between casual play and competitive excellence through meticulously organized tournaments and interactive live events.</p>
-              <p>Our mission is to build a robust gaming ecosystem where every player has the opportunity to shine and dominate the arena.</p>
+              <p>Strong Ties Gaming (STG) is a premier, community-driven esports platform in India, built to empower gamers and elevate competitive play to the next level.</p>
+              <p>Inspired by the spirit of a <span className="red-text">Phoenix</span>, STG represents resilience, growth, and relentless determination. We believe every setback is an opportunity to rise stronger, pushing boundaries and redefining excellence in the esports arena.</p>
+              <p>At STG, we bridge the gap between casual gaming and professional competition by hosting structured tournaments, high-quality events, and engaging live experiences. Our platform is designed to nurture talent, connect players, and create pathways for aspiring gamers to showcase their skills on a bigger stage.</p>
+              <p>Our mission is to build a dynamic and inclusive gaming ecosystem where every player—whether beginner or pro—has the opportunity to grow, compete, and dominate.</p>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Mission & Vision Section */}
-      <section className="mission-vision-section stg-section bg-darker">
-        <div className="stg-container">
-          <div className="mission-grid">
-            <div className="mission-card glass">
-              <h3 className="heading-font red-text">OUR MISSION</h3>
-              <p>To provide an unparalleled competitive ecosystem for PUBG & BGMI players, where skill meets reward. We aim to identify, foster, and showcase the next generation of esports stars in India.</p>
-            </div>
-            <div className="mission-card glass">
-              <h3 className="heading-font red-text">OUR VISION</h3>
-              <p>To become the bedrock of the Indian esports industry, bridging the gap between amateur enthusiasm and professional excellence through integrity, technology, and community-driven initiatives.</p>
-            </div>
-          </div>
         </div>
       </section>
 

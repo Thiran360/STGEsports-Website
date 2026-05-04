@@ -2,6 +2,26 @@
   background-color: var(--bg-dark);
 }
 
+@keyframes firePulse {
+  0% {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+    color: #cc0000;
+  }
+  50% {
+    text-shadow: 0 0 15px rgba(255, 0, 0, 1), 0 0 30px rgba(255, 0, 0, 0.8), 0 0 45px rgba(230, 0, 0, 0.6);
+    color: #ff3333;
+  }
+  100% {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+    color: #cc0000;
+  }
+}
+
+.fire-flicker-text {
+  animation: firePulse 1.5s infinite ease-in-out;
+  display: inline-block;
+}
+
 /* Hero Section */
 .lineup-hero {
   height: 100vh;
@@ -14,7 +34,7 @@
   position: absolute;
   inset: -5%;
   background-size: cover;
-  background-position: center;
+  background-position: top center;
   z-index: 0;
   animation: slowPan 25s ease-in-out infinite alternate;
 }
@@ -30,7 +50,7 @@
   inset: 0;
   background: 
     linear-gradient(to bottom, rgba(5, 5, 5, 0.4), var(--bg-dark)),
-    repeating-linear-gradient(0deg, transparent 0px, rgba(57, 255, 20, 0.03) 1px, transparent 2px);
+    repeating-linear-gradient(0deg, transparent 0px, rgba(230, 0, 0, 0.03) 1px, transparent 2px);
   z-index: 1;
 }
 
@@ -46,12 +66,12 @@
 
 .lineup-page .back-btn {
   position: absolute;
-  top: 7.5rem;
-  left: 2rem;
+  top: 9rem;
+  left: 4%;
   padding: 0.7rem 1.4rem;
   border-radius: 8px;
-  border: 1px solid var(--primary-green) !important;
-  color: var(--primary-green) !important;
+  border: 1px solid var(--primary-red) !important;
+  color: var(--primary-red) !important;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -59,12 +79,12 @@
   font-size: 0.75rem;
   letter-spacing: 2px;
   transition: all 0.3s ease;
-  z-index: 10;
+  z-index: 100;
 }
 
 .lineup-page .back-btn:hover {
-  background: rgba(57, 255, 20, 0.1);
-  box-shadow: 0 0 15px var(--green-glow);
+  background: rgba(230, 0, 0, 0.1);
+  box-shadow: 0 0 15px var(--accent-glow);
   transform: translateX(-5px);
 }
 
@@ -80,21 +100,21 @@
 .lineup-page .tactical-hud {
   position: absolute;
   z-index: 2;
-  color: var(--primary-green);
+  color: var(--primary-red);
   font-family: var(--font-heading);
 }
 
 .lineup-page .hud-left {
   bottom: 10%;
   left: 4rem;
-  border-left: 2px solid var(--primary-green);
+  border-left: 2px solid var(--primary-red);
   padding-left: 1.5rem;
 }
 
 .lineup-page .hud-right {
   bottom: 10%;
   right: 4rem;
-  border-right: 2px solid var(--primary-green);
+  border-right: 2px solid var(--primary-red);
   padding-right: 1.5rem;
   text-align: right;
 }
@@ -146,30 +166,30 @@
 .lineup-page .scroll-indicator-v2 span {
   font-size: 0.7rem;
   letter-spacing: 5px;
-  color: var(--primary-green) !important;
+  color: var(--primary-red) !important;
   opacity: 0.8;
 }
 
 .lineup-page .mouse-icon {
   width: 26px;
   height: 44px;
-  border: 2px solid var(--primary-green) !important;
+  border: 2px solid var(--primary-red) !important;
   border-radius: 20px;
   position: relative;
-  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+  box-shadow: 0 0 10px rgba(230, 0, 0, 0.3);
 }
 
 .lineup-page .mouse-icon .wheel {
   width: 4px;
   height: 8px;
-  background: var(--primary-green) !important;
+  background: var(--primary-red) !important;
   border-radius: 2px;
   position: absolute;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
   animation: mouseWheel 2s infinite ease-in-out;
-  box-shadow: 0 0 5px var(--primary-green);
+  box-shadow: 0 0 5px var(--primary-red);
 }
 
 @keyframes mouseWheel {
@@ -181,11 +201,11 @@
 .roster-tag {
   display: inline-block;
   padding: 0.5rem 2rem;
-  border: 1px solid rgba(57, 255, 20, 0.3);
+  border: 1px solid rgba(230, 0, 0, 0.3);
   border-radius: 50px;
-  background: rgba(57, 255, 20, 0.05);
+  background: rgba(230, 0, 0, 0.05);
   font-size: 0.75rem;
-  color: var(--primary-green);
+  color: var(--primary-red);
   letter-spacing: 3px;
   margin-bottom: 2.5rem;
 }
@@ -209,32 +229,41 @@
 /* Visionaries */
 .visionaries-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
 }
 
 .visionary-card {
   display: flex;
-  gap: 2.5rem;
-  padding: 3rem 2.5rem;
+  flex-direction: column;
+  text-align: center;
+  gap: 1.5rem;
+  padding: 2.5rem 2rem;
   border-radius: 20px;
   align-items: center;
   background: linear-gradient(135deg, rgba(20, 20, 25, 0.6) 0%, rgba(10, 10, 12, 0.8) 100%);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(57, 255, 20, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.2);
+  transition: all 0.5s ease;
+}
+
+.visionary-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-red);
 }
 
 .player-frame {
-  width: 220px;
-  height: 220px;
-  min-width: 220px;
+  width: 180px;
+  height: 180px;
+  min-width: 180px;
   position: relative;
-  border: 3px solid var(--primary-green);
+  border: 3px solid var(--primary-red);
   border-radius: 15px;
   overflow: hidden;
   padding: 5px;
   background: #000;
+  margin: 0 auto;
 }
 
 .player-frame img {
@@ -249,16 +278,16 @@
   bottom: 10px;
   right: 10px;
   background: #000;
-  color: var(--primary-green);
+  color: var(--primary-red);
   width: 30px;
   height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--primary-green);
+  border: 1px solid var(--primary-red);
   border-radius: 5px;
   font-size: 1.2rem;
-  box-shadow: 0 0 10px var(--green-glow);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .visionary-info {
@@ -270,16 +299,16 @@
   font-family: var(--font-heading);
   font-size: 0.65rem;
   padding: 0.3rem 1rem;
-  background: rgba(57, 255, 20, 0.1);
-  border: 1px solid rgba(57, 255, 20, 0.2);
+  background: rgba(230, 0, 0, 0.1);
+  border: 1px solid rgba(230, 0, 0, 0.2);
   display: inline-block;
-  align-self: flex-start;
+  align-self: center;
   margin-bottom: 1rem;
-  color: var(--primary-green);
+  color: var(--primary-red);
 }
 
-.role-green {
-  color: var(--primary-green);
+.role-red {
+  color: var(--primary-red);
   font-weight: 800;
   letter-spacing: 2px;
   font-size: 0.95rem;
@@ -297,12 +326,12 @@
   margin-bottom: 5rem;
 }
 
-.green-underline {
+.red-underline {
   width: 100px;
   height: 2px;
-  background: var(--primary-green);
+  background: var(--primary-red);
   margin: 1.5rem auto;
-  box-shadow: 0 0 10px var(--green-glow);
+  box-shadow: 0 0 10px var(--accent-glow);
 }
 
 .instruction-text {
@@ -320,20 +349,29 @@
 .squad-card {
   display: flex;
   align-items: center;
-  padding: 2rem;
-  gap: 1.5rem;
+  padding: 1.8rem;
+  gap: 1.2rem;
   border-radius: 12px;
   cursor: pointer;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(230, 0, 0, 0.3); /* Primary red border */
   position: relative;
   overflow: hidden;
+  transition: all 0.3s ease;
+  background: rgba(20, 20, 25, 0.4);
+}
+
+.squad-card:hover {
+  border-color: var(--primary-red);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(230, 0, 0, 0.2);
+  background: rgba(230, 0, 0, 0.05);
 }
 
 .squad-icon-box {
   width: 50px;
   height: 50px;
-  background: rgba(57, 255, 20, 0.05);
-  border: 1px solid rgba(57, 255, 20, 0.2);
+  background: rgba(230, 0, 0, 0.05);
+  border: 1px solid rgba(230, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;
   justify-content: center;
@@ -362,8 +400,8 @@
 }
 
 /* Helpers */
-.green-text {
-  color: var(--primary-green);
+.red-text {
+  color: var(--primary-red);
 }
 
 @media (max-width: 1200px) {
@@ -433,5 +471,20 @@
   .lineup-desc {
     font-size: 0.95rem;
     padding: 0 1rem;
+  }
+
+  .squad-card {
+    padding: 1.2rem;
+    gap: 1rem;
+  }
+
+  .squad-icon-box {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .squad-info h4 {
+    font-size: 1rem;
   }
 }

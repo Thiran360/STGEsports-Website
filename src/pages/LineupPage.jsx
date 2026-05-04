@@ -4,8 +4,10 @@ import { motion } from 'framer-motion';
 import PlayerModal from '../components/PlayerModal';
 import dharshanImg from '../assets/dharshan-stg.png';
 import donImg from '../assets/stg-don.png';
-import cyberBg from '../assets/bgmi-lineup-bg.png';
+import myluvLogo from '../assets/myluv-logo.png';
+import cyberBg from '../assets/lineup.jpeg';
 import './LineupPage.css';
+import '../components/SponsorsElite.css';
 
 const squadMembers = [
   { name: 'STG Esports', role: 'ENTRY FRAGGER', icon: '🎮', kd: '3.8', id: 'STG_ES_01' },
@@ -76,7 +78,7 @@ const LineupPage = () => {
           </div>
         </div>
 
-        <button className="back-btn glass" onClick={() => navigate(-1)}>
+        <button className="global-back-btn" onClick={() => navigate(-1)}>
           <span className="arrow">←</span> BACK
         </button>
 
@@ -96,7 +98,7 @@ const LineupPage = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              STG <span className="green-text">LINEUP</span>
+              STG <span className="red-text fire-flicker-text">LINEUP</span>
             </motion.h1>
             
             <motion.p 
@@ -124,7 +126,7 @@ const LineupPage = () => {
         <div className="stg-container">
           <div className="visionaries-grid">
             {/* Dharshan */}
-            <div className="visionary-card glass border-glow-green">
+            <div className="visionary-card glass">
               <div className="player-frame">
                 <img src={dharshanImg} alt="Dharshan STG" />
                 <div className="rank-star">★</div>
@@ -132,15 +134,31 @@ const LineupPage = () => {
               <div className="visionary-info">
                 <span className="tag-visionary">VISIONARY</span>
                 <h3 className="heading-font">Dharshan STG</h3>
-                <p className="role-green">IGL</p>
+                <p className="role-red">IGL</p>
                 <p className="visionary-desc">
                   Strategic Founder & CEO, leading STG Esports with a mission to empower elite talent and dominate the global stage.
                 </p>
               </div>
             </div>
 
+            {/* MYLUV Sponsor */}
+            <div className="visionary-card glass">
+              <div className="player-frame" style={{ background: '#000', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <img src={myluvLogo} alt="MYLUV" style={{ objectFit: 'contain', width: '90%', height: '90%' }} />
+              </div>
+              <div className="visionary-info">
+                <span className="tag-strategist">OFFICIAL SPONSOR</span>
+                <h3 className="heading-font">MYLUV</h3>
+                <p className="role-red">PREMIUM SPONSOR</p>
+                <p className="visionary-desc">
+                  Proudly sponsoring STG Esports on our journey to dominate the gaming universe.
+                  Unmatched support for unmatched talent.
+                </p>
+              </div>
+            </div>
+
             {/* STG DON */}
-            <div className="visionary-card glass border-glow-green">
+            <div className="visionary-card glass">
               <div className="player-frame">
                 <img src={donImg} alt="STG DON" />
                 <div className="rank-star">★</div>
@@ -148,7 +166,7 @@ const LineupPage = () => {
               <div className="visionary-info">
                 <span className="tag-strategist">STRATEGIST</span>
                 <h3 className="heading-font">STG DON</h3>
-                <p className="role-green">OPERATION MANAGER</p>
+                <p className="role-red">OPERATION MANAGER</p>
                 <p className="visionary-desc">
                   Masterminding team operations and orchestrating our path to regional dominance.
                 </p>
@@ -162,8 +180,8 @@ const LineupPage = () => {
       <section className="squad-section stg-section">
         <div className="stg-container">
           <motion.div className="squad-header center" {...fadeIn}>
-            <h2 className="heading-font">STG'S <span className="green-text">SQUAD</span></h2>
-            <div className="green-underline"></div>
+            <h2 className="heading-font">STG'S <span className="red-text">SQUAD</span></h2>
+            <div className="red-underline"></div>
             <p className="instruction-text">Click on a team card to view player stats</p>
           </motion.div>
 

@@ -36,16 +36,23 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
+  padding: 0;
+  width: 100%;
   min-width: 320px;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   background-color: #050505;
+  position: relative;
+  touch-action: pan-y;
+  overscroll-behavior-x: none;
 }
 
 #root {
   width: 100%;
+  overflow-x: hidden !important;
+  position: relative;
 }
 
 h1,
@@ -85,6 +92,11 @@ img {
 .border-glow-red {
   box-shadow: 0 0 15px var(--accent-glow);
   border: 1px solid var(--primary-red);
+}
+
+.glow-red {
+  color: #ff0000 !important;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
 }
 
 .border-glow-cyan {
@@ -146,5 +158,38 @@ img {
 @media (max-width: 768px) {
   .stg-section {
     padding: 5rem 0;
+  }
+}
+
+.global-back-btn {
+  position: absolute;
+  top: 7rem;
+  left: 5%;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-red) !important;
+  color: var(--primary-red) !important;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  z-index: 100;
+  cursor: pointer;
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+}
+
+.global-back-btn:hover {
+  background: rgba(255, 59, 48, 0.1);
+  box-shadow: 0 0 15px var(--accent-glow);
+}
+
+@media (max-width: 768px) {
+  .global-back-btn {
+    top: 5rem;
+    left: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
   }
 }

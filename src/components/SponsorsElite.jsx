@@ -7,15 +7,6 @@ import jerseyStageBg from '../assets/jersey-stage-red.png';
 import './SponsorsElite.css';
 
 const SponsorsElite = () => {
-  const [showingFront, setShowingFront] = useState(true);
-
-  // Auto-flip interval for jersey showcase
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowingFront(prev => !prev);
-    }, 4000); // Slightly longer interval for better visibility
-    return () => clearInterval(interval);
-  }, []);
 
   return (
     <section className="sponsors-elite-section stg-section">
@@ -25,7 +16,7 @@ const SponsorsElite = () => {
           {/* Left: Sponsors Card */}
           <div className="sponsors-column">
             <div className="official-badge heading-font border-glow-red">OFFICIAL SPONSOR</div>
-            <div className="sponsor-card glass">
+            <div className="sponsor-card glass border-glow-red">
               <div className="sponsor-logo-box">
                 <img src={myluvLogo} alt="MYLUV" className="partner-logo-img" />
               </div>
@@ -40,7 +31,64 @@ const SponsorsElite = () => {
             </div>
           </div>
 
-          {/* Right column removed as it was moved to Hero section */}
+          {/* Right: Jersey Showcase */}
+          <div className="elite-column">
+            <div className="elite-visual glass border-glow-red">
+              {/* Section Label */}
+              <div className="jersey-showcase-label heading-font">
+                <span className="label-dot"></span>
+                OFFICIAL JERSEY
+                <span className="label-dot"></span>
+              </div>
+
+              {/* Jersey + Stage Combined Zone */}
+              <div className="jersey-stage-zone theater-stage-theme">
+                <div 
+                  className="stage-background-layer" 
+                  style={{ backgroundImage: `url(${jerseyStageBg})` }}
+                ></div>
+                <div className="stage-spotlight-overlay"></div>
+                
+                <div className="jersey-showcase-container">
+                  <div className="jersey-rotator">
+                    <div className="jersey-card jersey-front-card">
+                      <img src={jerseyFront} alt="STG Jersey Front" className="jersey-img" />
+                      <div className="jersey-side-tag heading-font">FRONT</div>
+                    </div>
+                    <div className="jersey-card jersey-back-card">
+                      <img src={jerseyBack} alt="STG Jersey Back" className="jersey-img" />
+                      <div className="jersey-side-tag heading-font">BACK</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* High-Fidelity Platform Stage */}
+                <div className="elite-platform-stage">
+                  <div className="stage-level-base">
+                    <div className="stage-neon-outline"></div>
+                  </div>
+                  <div className="stage-level-middle">
+                    <div className="stage-neon-outline"></div>
+                  </div>
+                  <div className="stage-level-top">
+                    <div className="stage-neon-outline"></div>
+                  </div>
+                  <div className="stage-floor-glow-red"></div>
+                </div>
+
+                <div className="theater-stage-floor-shadow"></div>
+              </div>
+
+              {/* Bottom Bar: Branding */}
+              <div className="elite-bottom-bar">
+                <div className="elite-branding">
+                  <h4 className="heading-font">THE <span className="glow-cyan">NEXT</span> GEN</h4>
+                  <p className="elite-gaming-label">ELITE GAMING</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
 
         </div>
       </div>

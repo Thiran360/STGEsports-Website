@@ -8,7 +8,17 @@ import Events from '../components/Events';
 const Home = () => {
   return (
     <>
-      <Hero />
+      <Hero 
+        badgeText="India's #1 Esports Platform"
+        title={
+          <>
+            <span style={{ display: 'block', width: '100%', textAlign: 'center', fontSize: '0.55em', letterSpacing: '5px', color: 'var(--text-white)', opacity: 0.8, marginBottom: '0.5rem', fontWeight: 600 }}>WELCOME TO</span>
+            STG <span className="red-text">ESPORTS</span>
+          </>
+        }
+        subtitle="The ultimate battleground for PUBG & BGMI champions."
+        showTitleBox={false}
+      />
       <SponsorsElite />
       <Metrics />
       <Features />
