@@ -40,18 +40,26 @@
 
 @media (max-width: 600px) {
   .metrics-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: row; /* Force horizontal */
+    justify-content: center;
+    gap: 1.5rem; /* Reduced gap to fit */
+    flex-wrap: nowrap; /* Prevent wrapping */
   }
   
+  .metric-item {
+    flex: 1;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
   .metric-value {
-    font-size: 2.5rem;
+    font-size: 1.6rem; /* Significantly reduced to fit side-by-side */
   }
   
   .metric-label {
-    font-size: 0.7rem;
-    letter-spacing: 3px;
+    font-size: 0.5rem; /* Smaller label to fit */
+    letter-spacing: 1px;
+    line-height: 1.2;
   }
 }
 

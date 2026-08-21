@@ -12,7 +12,7 @@ const featuresList = [
     title: 'Tournaments',
     desc: 'Compete in grand esports tournaments with massive prize pools up to ₹1 Lakh',
     icon: '🏆',
-    color: 'dark-red'
+    color: 'red'
   },
   {
     title: 'Live Streaming',
@@ -24,25 +24,32 @@ const featuresList = [
     title: 'Achievements',
     desc: 'Earn badges, medals, and unique titles for your in-game performances',
     icon: '🥇',
-    color: 'dark-red'
+    color: 'red'
   }
 ];
+
+const FeatureCard = ({ f }) => {
+  return (
+    <div className={`feature-card static-professional-card`}>
+      <div className="feature-icon">{f.icon}</div>
+      <h3>{f.title}</h3>
+      <p>{f.desc}</p>
+    </div>
+  );
+};
 
 const Features = () => {
   return (
     <section className="features-section stg-section">
       <div className="stg-container">
         <div className="section-header">
-          <h2 className="glow-red">Core Features</h2>
+          <h2>Core Features</h2>
           <p>Everything you need to become a pro</p>
         </div>
+        
         <div className="features-grid">
           {featuresList.map((f, i) => (
-            <div key={i} className={`feature-card glass border-glow-${f.color}`}>
-              <div className={`feature-icon glow-${f.color}`}>{f.icon}</div>
-              <h3 className={`glow-${f.color}`}>{f.title}</h3>
-              <p>{f.desc}</p>
-            </div>
+            <FeatureCard key={i} f={f} />
           ))}
         </div>
       </div>

@@ -18,9 +18,9 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`navbar glass ${isOpen ? 'menu-open' : ''}`}>
+    <nav className="navbar glass">
       <div className="nav-container">
-        <Link to="/" className="logo" onClick={closeMenu}>
+        <Link to="/" className="logo">
           <div className="logo-icon-wrapper">
             <img src={logo} alt="STG Esports Logo" className="sg-logo" />
           </div>
@@ -30,14 +30,8 @@ const Navbar = () => {
           </div>
         </Link>
 
-        {/* Hamburger Menu Toggle */}
-        <div className={`nav-toggle ${isOpen ? 'active' : ''}`} onClick={toggleMenu}>
-          <span className="bar"></span>
-          <span className="bar"></span>
-          <span className="bar"></span>
-        </div>
-
-        <ul className={`nav-links ${isOpen ? 'show' : ''}`}>
+        {/* Desktop Links (Hidden on Mobile) */}
+        <ul className="nav-links desktop-only">
           <li>
             <NavLink 
               to="/" 
@@ -48,24 +42,23 @@ const Navbar = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/about' ? 'active glow-red' : '')}>
-              ABOUT
+            <NavLink to="/lineup" className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+              TEAM
             </NavLink>
           </li>
           <li>
-            <NavLink to="/lineup" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/lineup' ? 'active glow-red' : '')}>
-              LINEUP
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/events" onClick={closeMenu} className={({ isActive }) => (isActive || location.pathname === '/events' ? 'active glow-red' : '')}>
+            <NavLink to="/events" className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
               EVENTS
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/about" className={({ isActive }) => (isActive ? 'active glow-red' : '')}>
+              ABOUT
             </NavLink>
           </li>
           <li>
             <NavLink 
               to="/#contact" 
-              onClick={closeMenu} 
               className={() => (location.hash === '#contact' ? 'active glow-red' : '')}
             >
               CONTACT
@@ -73,9 +66,32 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      
-      {/* Mobile Overlay */}
-      {isOpen && <div className="nav-overlay" onClick={closeMenu}></div>}
+
+      {/* Mobile Sub-Navbar (Visible only on Mobile) */}
+      <div className="mobile-sub-nav">
+        <ul className="mobile-nav-list">
+          <li>
+            <NavLink 
+              to="/" 
+              onClick={handleHomeClick} 
+              className={() => (location.pathname === '/' && (location.hash === '' || location.hash === '#') ? 'active' : '')}
+            >
+              HOME
+            </NavLink>
+          </li>
+          <li><NavLink to="/lineup" className={({ isActive }) => (isActive ? 'active' : '')}>TEAM</NavLink></li>
+          <li><NavLink to="/events" className={({ isActive }) => (isActive ? 'active' : '')}>EVENTS</NavLink></li>
+          <li><NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : '')}>ABOUT</NavLink></li>
+          <li>
+            <NavLink 
+              to="/#contact" 
+              className={() => (location.hash === '#contact' ? 'active' : '')}
+            >
+              CONTACT
+            </NavLink>
+          </li>
+        </ul>
+      </div>
     </nav>
   );
 };

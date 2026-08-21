@@ -1,5 +1,5 @@
 .footer-section {
-  padding: 5rem 2rem 2rem;
+  padding: 3rem 2rem 2rem;
   background-color: transparent;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -153,6 +153,18 @@
   color: #fff;
 }
 
+.instagram-gradient {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
+.youtube-gradient {
+  background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%) !important;
+  color: #fff !important;
+  border: none !important;
+}
+
 .footer-bottom {
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -191,9 +203,25 @@
 @media (max-width: 900px) {
   .footer-main {
     flex-direction: column;
+    gap: 3rem;
   }
   
+  .footer-brand {
+    max-width: 100%;
+  }
+
+  .footer-brand-title {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
   .footer-links {
-    gap: 3rem;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: space-between;
   }
 }

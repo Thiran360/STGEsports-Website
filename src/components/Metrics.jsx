@@ -1,27 +1,28 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useMotionValue, useTransform, animate } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
 import './Metrics.css';
 
 const Counter = ({ value, suffix = '', prefix = '' }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, amount: 0.5 });
-  const count = useMotionValue(0);
-  const rounded = useTransform(count, (latest) => Math.round(latest));
-  
+  const isInView = useInView(ref, { once: false, margin: "-50px" });
+  const [count, setCount] = useState(0);
+
   useEffect(() => {
     if (isInView) {
-      const controls = animate(count, value, { duration: 2, ease: "easeOut" });
-      return controls.stop;
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: "easeOut",
+        onUpdate: (latest) => setCount(Math.floor(latest)),
+      });
+      return () => controls.stop();
     } else {
-      count.set(0); // Reset when scrolled out of view
+      setCount(0); // Reset count when out of view so it restarts from 0 next time
     }
-  }, [isInView, value, count]);
+  }, [isInView, value]);
 
   return (
     <span ref={ref}>
-      {prefix}
-      <motion.span>{rounded}</motion.span>
-      {suffix}
+      {prefix}{count}{suffix}
     </span>
   );
 };
@@ -37,21 +38,37 @@ const Metrics = () => {
     <section className="metrics-section stg-section">
       <div className="stg-container">
         <div className="section-header">
-          <h2 className="heading-font">METRICS THAT <span className="glow-red">MATTER</span></h2>
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+            className="heading-font"
+          >
+            METRICS THAT <span className="glow-red">MATTER</span>
+          </motion.h2>
         </div>
         <div className="metrics-grid">
           {metricsData.map((m, i) => (
-            <div key={i} className="metric-item">
+            <motion.div 
+              key={i} 
+              className="metric-item"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.4 }}
+            >
               <span className={`metric-value heading-font glow-${m.color}`}>
                 <Counter value={m.target} suffix={m.suffix} prefix={m.prefix} />
               </span>
               <span className="metric-label">{m.label}</span>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
+
   );
 };
 
 export default Metrics;
+

@@ -1,0 +1,1425 @@
+/* ─── Admin Dashboard ────────────────────────────────────── */
+.adm-bg {
+  min-height: 100vh;
+  background: #050507;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.adm-scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.012) 2px,
+    rgba(255,255,255,0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Header ─────────────────────────────────────────────── */
+.adm-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.9rem 1.5rem;
+  background: rgba(8, 8, 14, 0.95);
+  border-bottom: 1px solid rgba(230, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  gap: 1rem;
+}
+
+.adm-header-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.adm-header-icon {
+  font-size: 1.5rem;
+}
+
+.adm-header-title {
+  display: block;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+.adm-header-sub {
+  display: block;
+  font-size: 0.55rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.3);
+  margin-top: -2px;
+}
+
+.adm-header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.adm-saved-toast {
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #39FF14;
+  background: rgba(57, 255, 20, 0.1);
+  border: 1px solid rgba(57, 255, 20, 0.3);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  animation: fadeInOut 2.5s ease forwards;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-4px); }
+  15% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes adm-spin {
+  to { transform: rotate(360deg); }
+}
+
+.adm-profile-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition:  0.1s ease;
+  white-space: nowrap;
+}
+
+.adm-profile-btn:hover {
+  border-color: rgba(255,255,255,0.4);
+  color: #fff;
+}
+
+.adm-logout-btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid rgba(230, 0, 0, 0.4);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition:  0.1s ease;
+  white-space: nowrap;
+}
+
+.adm-logout-btn:hover {
+  border-color: #e60000;
+  color: #e60000;
+  background: rgba(230, 0, 0, 0.07);
+}
+
+.adm-mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 101;
+  transition:  0.1s;
+}
+
+.adm-mobile-menu-btn:hover {
+  color: #fff;
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+.adm-layout {
+  display: flex;
+  min-height: calc(100vh - 56px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── Sidebar ────────────────────────────────────────────── */
+.adm-sidebar {
+  width: 200px;
+  min-width: 200px;
+  background: rgba(8, 8, 14, 0.8);
+  border-right: 1px solid rgba(255,255,255,0.06);
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.adm-sidebar-label {
+  font-size: 0.55rem;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.25);
+  margin-bottom: 0.5rem;
+}
+
+.adm-team-tab-row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.adm-team-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  padding: 0.65rem 0.8rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition:  0.1s ease;
+  text-align: left;
+  min-width: 0;
+}
+
+.adm-team-tab:hover {
+  background: rgba(255,255,255,0.03);
+  color: rgba(255,255,255,0.7);
+}
+
+.adm-team-tab--active {
+  background: rgba(255,255,255,0.04);
+  font-weight: 700;
+}
+
+.adm-team-del-btn {
+  flex-shrink: 0;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.2);
+  padding: 0.4rem 0.45rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:  0.1s ease;
+}
+
+.adm-team-del-btn:hover {
+  border-color: rgba(230,0,0,0.5);
+  color: #ff4444;
+  background: rgba(230,0,0,0.08);
+}
+
+.adm-tab-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─── Main Content ───────────────────────────────────────── */
+.adm-main {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+}
+
+.adm-main-header {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.adm-main-actions {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.adm-add-btn {
+  padding: 0.55rem 1.2rem;
+  background: transparent;
+  border: 1px solid;
+  border-radius: 8px;
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:  0.1s ease;
+  flex-shrink: 0;
+}
+
+.adm-add-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+.adm-main-title {
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  margin: 0 0 0.2rem;
+}
+
+.adm-main-sub {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 1px;
+}
+
+/* ─── Players Grid ───────────────────────────────────────── */
+.adm-players-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+}
+
+.adm-player-card {
+  background: linear-gradient(145deg, #0d0d12, #080810);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-top: 2px solid var(--team-glow);
+  border-radius: 12px;
+  overflow: hidden;
+  transition:  0.1s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.adm-card-top-actions {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 10;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.adm-top-btn {
+  background: rgba(0,0,0,0.7);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 4px;
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 0.35rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:  0.1s ease;
+}
+
+.adm-top-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.adm-card-actions {
+  display: flex;
+  align-items: stretch;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+
+.adm-card-del-btn {
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.25);
+  font-size: 0.9rem;
+  padding: 0.5rem 0.6rem;
+  cursor: pointer;
+  transition:  0.1s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.adm-card-del-btn:hover {
+  background: rgba(230,0,0,0.12);
+  color: #ff4444;
+}
+
+.adm-player-card:hover {
+  border-color: var(--team-glow);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Add New Tile */
+.adm-add-tile {
+  background: rgba(255,255,255,0.02);
+  border: 1.5px dashed rgba(255,255,255,0.1);
+  border-top: 2px dashed var(--team-glow);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition:  0.1s ease;
+  min-height: 160px;
+  padding: 1rem;
+}
+
+.adm-add-tile:hover {
+  background: rgba(255,255,255,0.04);
+  border-color: var(--team-glow);
+  transform: translateY(-3px);
+}
+
+.adm-add-tile-icon {
+  font-size: 1.8rem;
+  opacity: 0.5;
+}
+
+.adm-add-tile-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+  text-transform: uppercase;
+}
+
+.adm-player-photo-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  background: #0a0a0e;
+}
+
+.adm-player-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.adm-player-no-photo {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #111 0%, #050505 100%);
+  opacity: 0.5;
+}
+
+.adm-player-edit-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition:  0.1s ease;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.adm-player-card:hover .adm-player-edit-overlay {
+  opacity: 1;
+}
+
+.adm-player-num {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.55rem;
+  font-weight: 900;
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-heading, monospace);
+  letter-spacing: 1px;
+}
+
+.adm-player-info {
+  padding: 0.6rem 0.7rem 0.8rem;
+}
+
+.adm-player-tag {
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-player-role {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.adm-player-ig {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.25);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ─── Edit Modal ─────────────────────────────────────────── */
+.adm-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.92);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  overflow-y: auto;
+}
+
+.adm-modal {
+  width: 100%;
+  max-width: 520px;
+  max-height: 92vh;
+  overflow-y: auto;
+  background: #0a0a10;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ─── Custom Confirm Delete Modal ───────────────────────── */
+.adm-confirm-modal {
+  background: #0d0d14;
+  border: 1px solid rgba(230,0,0,0.25);
+  border-radius: 16px;
+  padding: 2rem 1.5rem 1.5rem;
+  max-width: 320px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(230,0,0,0.08);
+  animation: confirmSlideIn 0.2s ease;
+}
+
+@keyframes confirmSlideIn {
+  from { opacity: 0; transform: scale(0.92) translateY(-10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.adm-confirm-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(230,0,0,0.1);
+  border: 1px solid rgba(230,0,0,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.3rem;
+}
+
+.adm-confirm-title {
+  font-size: 1rem;
+  letter-spacing: 3px;
+  color: #fff;
+  margin: 0;
+}
+
+.adm-confirm-msg {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  text-align: center;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.adm-confirm-name {
+  color: rgba(255,255,255,0.85);
+  font-weight: 600;
+}
+
+.adm-confirm-actions {
+  display: flex;
+  gap: 0.7rem;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.adm-confirm-cancel {
+  flex: 1;
+  padding: 0.7rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  font-family: var(--font-heading, monospace);
+  transition:  0.1s;
+}
+
+.adm-confirm-cancel:hover {
+  border-color: rgba(255,255,255,0.3);
+  color: #fff;
+}
+
+.adm-confirm-yes {
+  flex: 1;
+  padding: 0.7rem;
+  background: linear-gradient(135deg, #cc0000, #e60000);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-heading, monospace);
+  transition:  0.1s;
+  box-shadow: 0 4px 16px rgba(230,0,0,0.35);
+}
+
+.adm-confirm-yes:hover {
+  filter: brightness(1.15);
+  transform: translateY(-1px);
+}
+
+/* ─── Team Select Modal ──────────────────────────────────── */
+.adm-team-select-modal {
+  background: #0a0a10;
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 340px;
+  overflow: hidden;
+  animation: confirmSlideIn 0.2s ease;
+}
+
+.adm-team-select-list {
+  padding: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.adm-team-select-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 10px;
+  color: rgba(255,255,255,0.7);
+  font-size: 0.82rem;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:  0.1s ease;
+  text-align: left;
+}
+
+.adm-team-select-item:hover {
+  background: rgba(255,255,255,0.07);
+  border-color: var(--glow);
+  color: #fff;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--glow) 20%, transparent);
+}
+
+.adm-team-select-label {
+  flex: 1;
+  font-family: var(--font-heading, monospace);
+}
+
+/* ─── Team Badge in Add Player ───────────────────────────── */
+.adm-team-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid;
+  border-radius: 6px;
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  font-family: var(--font-heading, monospace);
+  background: rgba(255,255,255,0.03);
+  align-self: flex-start;
+}
+
+.adm-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-top: 3px solid;
+  border-radius: 14px 14px 0 0;
+  flex-shrink: 0;
+}
+
+.adm-modal-title {
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: #fff;
+  margin: 0;
+}
+
+.adm-modal-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.4);
+  font-size: 1rem;
+  cursor: pointer;
+  transition:  0.1s;
+  padding: 0;
+}
+
+.adm-modal-close:hover { color: #fff; }
+
+.adm-modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow-y: auto;
+}
+
+/* Photo Upload */
+.adm-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.adm-photo-preview {
+  width: 120px;
+  height: 150px;
+  border-radius: 10px;
+  border: 2px dashed;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  background: #0d0d12;
+  transition:  0.1s ease;
+}
+
+.adm-photo-preview:hover .adm-photo-overlay { opacity: 1; }
+
+.adm-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.adm-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+
+.adm-photo-hint {
+  font-size: 0.6rem;
+  color: rgba(255,255,255,0.3);
+  text-align: center;
+  padding: 0 0.5rem;
+  letter-spacing: 1px;
+}
+
+.adm-photo-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  color: #fff;
+  opacity: 0;
+  transition:  0.1s;
+}
+
+.adm-remove-photo-btn {
+  background: none;
+  border: 1px solid rgba(230, 0, 0, 0.4);
+  color: rgba(230, 0, 0, 0.8);
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 0.3rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition:  0.1s;
+}
+
+.adm-remove-photo-btn:hover {
+  background: rgba(230, 0, 0, 0.1);
+}
+
+/* Fields */
+.adm-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.adm-field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.adm-field-label {
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  color: rgba(255,255,255,0.3);
+}
+
+.adm-field-input {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0.65rem 0.9rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+  width: 100%;
+  transition:  0.1s ease;
+  box-sizing: border-box;
+}
+
+.adm-field-input:focus {
+  border-color: rgba(255,255,255,0.2);
+}
+
+.adm-textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.adm-ig-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  width: 100%;
+}
+
+.adm-ig-at {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-right: none;
+  border-radius: 8px 0 0 8px;
+  padding: 0.65rem 0.7rem;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+  box-sizing: border-box;
+}
+
+.adm-ig-row .adm-field-input {
+  border-radius: 0 8px 8px 0;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Footer */
+.adm-modal-footer {
+  display: flex;
+  gap: 0.8rem;
+  padding: 1rem 1.5rem 1.5rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.adm-btn-delete {
+  background: transparent;
+  border: 1px solid rgba(230,0,0,0.4);
+  border-radius: 8px;
+  color: rgba(230,0,0,0.7);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  transition:  0.1s;
+  margin-right: auto;
+}
+
+.adm-btn-delete:hover {
+  background: rgba(230,0,0,0.1);
+  color: #ff4444;
+}
+
+.adm-confirm-del {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  width: 100%;
+  background: rgba(230,0,0,0.08);
+  border: 1px solid rgba(230,0,0,0.25);
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-size: 0.8rem;
+  color: #ff6666;
+}
+
+.adm-btn-del-yes {
+  background: #cc0000;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
+  padding: 0.4rem 0.9rem;
+  cursor: pointer;
+  transition:  0.1s;
+}
+
+.adm-btn-del-yes:hover { background: #e60000; }
+
+.adm-btn-cancel {
+  flex: 1;
+  padding: 0.75rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition:  0.1s;
+  font-family: var(--font-heading, monospace);
+}
+
+.adm-btn-cancel:hover {
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+}
+
+.adm-btn-save {
+  flex: 2;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  font-weight: 900;
+  cursor: pointer;
+  transition:  0.1s;
+  font-family: var(--font-heading, monospace);
+}
+
+.adm-btn-save:hover { filter: brightness(1.15); transform: translateY(-1px); }
+
+/* Profile modal extras */
+.adm-profile-hint {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+}
+
+.adm-profile-msg {
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.adm-msg-ok  { background: rgba(57,255,20,0.08); border: 1px solid rgba(57,255,20,0.3); color: #39FF14; }
+.adm-msg-err { background: rgba(230,0,0,0.08);   border: 1px solid rgba(230,0,0,0.3);  color: #ff4444; }
+
+.adm-input-icon-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 0 0.9rem 0 0.7rem;
+  transition:  0.1s;
+}
+
+.adm-input-icon-wrap:focus-within { border-color: rgba(230,0,0,0.5); }
+
+.adm-input-icon-wrap .adm-field-input {
+  background: transparent;
+  border: none;
+  padding: 0.65rem 0;
+}
+
+.adm-fi { font-size: 1rem; flex-shrink: 0; }
+
+.adm-eye-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  opacity: 0.45;
+  transition:  0.1s;
+  padding: 0;
+}
+
+.adm-eye-btn:hover { opacity: 1; }
+
+/* ─── Top Tabs ───────────────────────────────────────────── */
+.adm-tabs-center {
+  display: flex;
+  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+}
+
+.adm-tab-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.4);
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  font-size: 0.8rem;
+  transition:  0.1s;
+}
+
+.adm-tab-btn:hover {
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+}
+
+.adm-tab-btn.active {
+  background: rgba(230,0,0,0.1);
+  border-color: #e60000;
+  color: #e60000;
+  box-shadow: 0 0 15px rgba(230,0,0,0.2);
+}
+
+/* ─── Events Layout (Split Pane) ───────────────────────── */
+.adm-events-split-layout {
+  display: flex;
+  height: calc(100vh - 80px);
+  overflow: visible;
+}
+
+.adm-events-left {
+  flex: 1;
+  padding: 1.5rem 2rem;
+  overflow-y: auto;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+.adm-events-right {
+  width: 450px;
+  min-width: 450px;
+  background: #0a0a10;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  position: sticky;
+  top: 0;
+}
+
+.adm-events-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.adm-no-selection {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.3);
+  font-family: var(--font-heading, monospace);
+  letter-spacing: 2px;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* ─── Events Grid ──────────────────────────────────────── */
+.adm-events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.adm-event-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid rgba(255,255,255,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition:  0.1s;
+}
+
+.adm-event-card:hover, .adm-event-card.active {
+  border-color: rgba(230,0,0,0.4);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transform: translateY(-2px);
+}
+
+.adm-event-img-wrap {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #050505;
+  position: relative;
+}
+
+.adm-event-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.adm-event-no-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.2);
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.adm-event-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 4px 10px;
+  font-size: 0.6rem;
+  font-weight: 800;
+  border-radius: 4px;
+  letter-spacing: 1px;
+}
+
+.adm-event-badge.completed { background: rgba(0,0,0,0.85); color: #ffd700; border: 1px solid #ffd700; }
+.adm-event-badge.upcoming { background: rgba(0,0,0,0.85); color: #e50914; border: 1px solid #e50914; }
+
+.adm-event-info {
+  padding: 1rem;
+}
+.adm-event-info h4 { margin: 0 0 0.5rem 0; font-size: 1.1rem; color: #fff; line-height: 1.2; }
+.adm-event-info p { margin: 0; font-size: 0.75rem; color: rgba(255,255,255,0.4); letter-spacing: 1px; }
+
+/* ─── Embedded Event Form ──────────────────────────────── */
+.adm-event-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.adm-event-form-header {
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  padding-bottom: 1rem;
+}
+.adm-event-form-title {
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .adm-events-split-layout {
+    flex-direction: column;
+    height: auto;
+    overflow: visible;
+  }
+  
+  /* When AN event IS selected, show the form panel on top */
+  .adm-events-right {
+    width: 100%;
+    min-width: unset;
+    height: auto;
+    position: static;
+    overflow: visible;
+    order: -1;
+  }
+  
+  /* When no event selected, hide the right panel */
+  .adm-events-split-layout:has(.adm-no-selection) .adm-events-right {
+    display: none;
+  }
+
+  /* Show back button on mobile */
+  .adm-event-back-btn {
+    display: flex !important;
+  }
+
+  .adm-events-left {
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 1rem;
+    overflow: visible;
+  }
+
+  /* When form is shown on mobile, still show the list BELOW so user can switch */
+  .adm-events-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .adm-mobile-menu-btn {
+    display: block;
+  }
+  
+  .adm-header-right {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(8, 8, 14, 0.98);
+    border: 1px solid rgba(230, 0, 0, 0.2);
+    border-top: none;
+    border-radius: 0 0 0 12px;
+    padding: 1.2rem;
+    flex-direction: column;
+    align-items: stretch;
+    min-width: 180px;
+    box-shadow: -5px 10px 20px rgba(0,0,0,0.5);
+    gap: 0.8rem;
+  }
+
+  .adm-header-right.adm-menu-open {
+    display: flex;
+  }
+
+  .adm-layout {
+    flex-direction: column;
+  }
+
+  .adm-sidebar {
+    width: 100%;
+    min-width: unset;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 0.8rem;
+    gap: 0.5rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .adm-sidebar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .adm-sidebar-label { display: none; }
+
+  .adm-team-tab {
+    white-space: nowrap;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    padding: 0.5rem 0.8rem;
+    width: max-content;
+  }
+
+  .adm-main {
+    padding: 1rem;
+  }
+
+  .adm-main-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .adm-main-actions {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .adm-add-btn {
+    flex: 1;
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.65rem;
+    margin: 0;
+  }
+
+  .adm-players-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .adm-player-card {
+    border: 1.5px solid var(--team-glow);
+    border-top: 2.5px solid var(--team-glow);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--team-glow) 20%, transparent);
+  }
+
+  .adm-add-tile {
+    border: 1.5px dashed var(--team-glow);
+    border-top: 2px dashed var(--team-glow);
+  }
+
+  .adm-player-photo-wrap {
+    aspect-ratio: 1/1;
+  }
+
+  .adm-modal-overlay {
+    padding: 0.8rem;
+    align-items: center;
+  }
+
+  .adm-modal {
+    max-width: 100%;
+    max-height: 90vh;
+    margin-top: 0;
+    border-radius: 12px;
+  }
+
+  .adm-modal-header {
+    padding: 0.8rem 1rem;
+  }
+  
+  .adm-modal-title {
+    font-size: 0.85rem;
+  }
+
+  .adm-modal-body {
+    padding: 0.8rem 1rem;
+    gap: 0.8rem;
+  }
+
+  .adm-fields {
+    gap: 0.6rem;
+  }
+
+  .adm-field-group {
+    gap: 0.25rem;
+  }
+
+  .adm-field-label {
+    font-size: 0.55rem;
+  }
+
+  .adm-field-input {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 6px;
+  }
+
+  .adm-textarea {
+    height: 55px;
+    min-height: 55px;
+  }
+
+  .adm-ig-row {
+    width: 100%;
+  }
+
+  .adm-ig-at {
+    padding: 0.45rem 0.6rem;
+    font-size: 0.75rem;
+    border-radius: 6px 0 0 6px;
+  }
+
+  .adm-ig-row .adm-field-input {
+    border-radius: 0 6px 6px 0;
+  }
+
+  .adm-photo-preview {
+    width: 70px;
+    height: 85px;
+    border-radius: 8px;
+  }
+
+  .adm-photo-hint {
+    font-size: 0.5rem;
+  }
+
+  .adm-modal-footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+  }
+
+  .adm-btn-cancel, .adm-btn-save {
+    flex: 1;
+    padding: 0.6rem;
+    font-size: 0.65rem;
+    margin: 0;
+  }
+
+  .adm-btn-delete {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 0.65rem;
+    margin: 0 0 0.2rem 0;
+  }
+
+  .adm-header {
+    padding: 0.7rem;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .adm-header-right {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.8rem;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: rgba(8, 8, 14, 0.98);
+    border: 1px solid rgba(230, 0, 0, 0.2);
+    border-top: none;
+    border-radius: 0 0 0 12px;
+    padding: 1.2rem;
+    box-shadow: -5px 10px 20px rgba(0,0,0,0.5);
+    z-index: 100;
+  }
+
+  .adm-profile-btn, .adm-logout-btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.8rem;
+    font-size: 0.75rem;
+  }
+}

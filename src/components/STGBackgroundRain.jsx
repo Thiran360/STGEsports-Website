@@ -10,8 +10,12 @@ const STGBackgroundRain = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: false }); // alpha:false = faster compositing
     let animationFrameId;
+    let lastTime = 0;
+    const FPS = 24; // Throttle to 24fps - smooth enough, saves CPU
+    const fpsInterval = 1000 / FPS;
+    let isPaused = false;
 
     // Load images
     const stgImg = new Image();
@@ -29,7 +33,6 @@ const STGBackgroundRain = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
       columns = Math.floor(canvas.width / fontSize);
-      // Preserve existing drops if possible or just reset
       drops = Array(columns).fill(0).map(() => Math.random() * -100);
       dropData = Array(columns).fill(0).map(() => {
         const rand = Math.random();
@@ -39,10 +42,31 @@ const STGBackgroundRain = () => {
       });
     };
 
-    window.addEventListener('resize', initRain);
+    // Debounce resize
+    let resizeTimer;
+    const handleResize = () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(initRain, 150);
+    };
+    window.addEventListener('resize', handleResize);
     initRain();
 
-    const draw = () => {
+    // Pause when tab is hidden to save CPU
+    const handleVisibility = () => {
+      isPaused = document.hidden;
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    const draw = (timestamp) => {
+      animationFrameId = requestAnimationFrame(draw);
+
+      if (isPaused) return; // Tab hidden - skip drawing
+
+      // Throttle: only draw if enough time has passed
+      const elapsed = timestamp - lastTime;
+      if (elapsed < fpsInterval) return;
+      lastTime = timestamp - (elapsed % fpsInterval);
+
       // Semi-transparent black to create trailing effect
       ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -54,24 +78,20 @@ const STGBackgroundRain = () => {
         const y = drops[i] * fontSize;
 
         if (dropData[i] === 0) {
-          // Draw character - Brighter Red
           const text = characters[Math.floor(Math.random() * characters.length)];
           const opacity = Math.random() * 0.7 + 0.3;
           ctx.fillStyle = `rgba(255, 20, 20, ${opacity})`;
           ctx.fillText(text, x, y);
         } else if (dropData[i] === 1 && stgImg.complete) {
-          // Draw STG Logo
           ctx.globalAlpha = 0.6;
           ctx.drawImage(stgImg, x - 10, y - 10, 32, 32);
           ctx.globalAlpha = 1.0;
         } else if (dropData[i] === 2 && myluvImg.complete) {
-          // Draw MYLUV Logo
           ctx.globalAlpha = 0.6;
           ctx.drawImage(myluvImg, x - 10, y - 10, 42, 42);
           ctx.globalAlpha = 1.0;
         }
 
-        // Reset drop randomly after hitting the bottom
         if (y > canvas.height) {
           if (Math.random() > 0.975) {
             drops[i] = 0;
@@ -82,22 +102,20 @@ const STGBackgroundRain = () => {
           }
         }
         
-        // Speed control
         if (dropData[i] === 0) {
           drops[i] += 1;
         } else {
           drops[i] += 0.4;
         }
       }
-
-      animationFrameId = requestAnimationFrame(draw);
     };
 
-    console.log('STG Background Rain: Initialized with', columns, 'columns');
-    draw();
+    animationFrameId = requestAnimationFrame(draw);
 
     return () => {
-      window.removeEventListener('resize', initRain);
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('visibilitychange', handleVisibility);
+      clearTimeout(resizeTimer);
       cancelAnimationFrame(animationFrameId);
     };
   }, []);

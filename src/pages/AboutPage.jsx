@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
+// Last updated: 2026-05-06 19:15
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import aboutHeroBg from '../assets/about-hero-new.jpeg';
 import phoenixBg from '../assets/mission-bg-new.jpg';
 import jokerBg from '../assets/vision-bg-joker.jpeg';
+import birdImg from '../assets/bird.jpeg';
+import jokerImg from '../assets/jr.jpeg';
+import STGWatermark from '../components/STGWatermark';
 import './AboutPage.css';
 
 const AboutPage = () => {
@@ -22,46 +25,73 @@ const AboutPage = () => {
 
   return (
     <div className="about-page">
-      {/* Hero Section with Gaming Background */}
+      <STGWatermark />
+      {/* Hero Section - 3 column layout */}
       <section className="about-hero">
-        <div className="about-hero-bg" style={{ backgroundImage: `url(${aboutHeroBg})` }}></div>
-        <div className="hero-overlay"></div>
-        <div className="stg-container flex-col h-full center-content relative">
-          <button className="global-back-btn" onClick={() => navigate(-1)}>
-            <span className="arrow">←</span> BACK
-          </button>
-          
-          <div className="hero-content center">
+        <button className="global-back-btn" onClick={() => navigate(-1)}>
+          <span className="arrow">←</span> BACK
+        </button>
+
+        <div className="about-hero-grid">
+
+          {/* Left Column - Phoenix */}
+          <div className="hero-img-col left-col">
+            <div className="hero-img-box">
+              <img src={birdImg} alt="Phoenix" loading="lazy" decoding="async" />
+            </div>
+          </div>
+
+          {/* Center Column - Title */}
+          <div className="hero-center-col">
             <motion.div 
               className="legacy-tag-pill"
-              initial={{ opacity: 0, scale: 0.8, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6, type: 'spring' }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
             >
               THE STG LEGACY
             </motion.div>
             
             <motion.h1 
               className="hero-title heading-font"
-              initial={{ opacity: 0, y: 40, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              transition={{ duration: 1, delay: 0.5, ease: 'easeOut' }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
             >
-              OUR <span className="red-text fire-flicker-text">STG ESPORTS</span> PRINCIPLES
+              <span className="line-1">OUR <span className="red-text">STG ESPORTS</span></span>
+              <span className="line-2">PRINCIPLES</span>
             </motion.h1>
+
+            <motion.div 
+              className="hero-tags-row"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <div className="tag-input-box">PHOENIX</div>
+              <div className="tag-input-box">JOKER</div>
+            </motion.div>
+
+            <motion.div 
+              className="scroll-indicator-v2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.8 }}
+              transition={{ delay: 0.7, duration: 0.6 }}
+            >
+              <span className="heading-font">SCROLL</span>
+              <div className="mouse-icon">
+                <div className="wheel"></div>
+              </div>
+            </motion.div>
           </div>
 
-          <motion.div 
-            className="scroll-indicator-v2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.8 }}
-            transition={{ delay: 1.2, duration: 1 }}
-          >
-            <span className="heading-font">SCROLL</span>
-            <div className="mouse-icon">
-              <div className="wheel"></div>
+          {/* Right Column - Joker */}
+          <div className="hero-img-col right-col">
+            <div className="hero-img-box">
+              <img src={jokerImg} alt="Joker" loading="lazy" decoding="async" />
             </div>
-          </motion.div>
+          </div>
+
         </div>
       </section>
 
@@ -108,15 +138,18 @@ const AboutPage = () => {
           </motion.div>
 
           <div className="values-grid-v2">
-            <div className="value-card glass">
+            <div className="value-card">
+              <div className="value-icon">⚖️</div>
               <h3 className="heading-font red-text">INTEGRITY</h3>
               <p>Fair play is our priority. We maintain the highest standards of tournament regulation.</p>
             </div>
-            <div className="value-card glass">
+            <div className="value-card">
+              <div className="value-icon">💡</div>
               <h3 className="heading-font red-text">INNOVATION</h3>
               <p>Leveraging cutting-edge tech to provide a seamless and immersive tournament experience.</p>
             </div>
-            <div className="value-card glass">
+            <div className="value-card">
+              <div className="value-icon">🎮</div>
               <h3 className="heading-font red-text">COMMUNITY</h3>
               <p>STG is built by gamers, for gamers. We listen, adapt, and grow with our community.</p>
             </div>

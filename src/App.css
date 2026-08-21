@@ -1,10 +1,15 @@
 .app-container {
   width: 100%;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* Isolate the app from scroll chain issues */
+  overscroll-behavior: none;
 }
 
 main {
   width: 100%;
+  flex: 1;
 }
 
 .about-section {

@@ -23,7 +23,7 @@ const Lineup = () => {
           {players.map((p, i) => (
             <div key={i} className="player-card glass border-glow-green" onClick={() => setSelectedPlayer(p)}>
               <div className="player-img-container">
-                <img src={p.img} alt={p.name} className="player-img" />
+                <img src={p.img} alt={p.name} className="player-img" loading="lazy" decoding="async" />
                 <div className="player-info">
                   <h3>{p.name}</h3>
                   <p>{p.role}</p>

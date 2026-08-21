@@ -47,6 +47,8 @@ html, body {
   position: relative;
   touch-action: pan-y;
   overscroll-behavior-x: none;
+  /* scroll-behavior: smooth removed - causes janky/slow scroll */
+  text-rendering: optimizeSpeed;
 }
 
 #root {
@@ -77,15 +79,24 @@ ul {
 
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+  image-rendering: -webkit-optimize-contrast;
+  /* Lazy loaded images get contain for faster layout */
+  contain: layout style;
 }
 
-/* Glassmorphism Utility */
+/* Eager (above-fold) images: no lazy, paint fast */
+img[loading="eager"] {
+  contain: none;
+}
+
+/* Glassmorphism Utility - Optimized for Scroll Performance */
 .glass {
-  background: var(--bg-card);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(15, 18, 24, 0.85); /* Opaque background instead of expensive blur */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 /* Glow Utilities */
@@ -112,6 +123,76 @@ img {
 .border-glow-green {
   box-shadow: 0 0 15px var(--green-glow);
   border: 1px solid var(--primary-green);
+}
+
+/* Animated Glow Border Utility */
+.animated-glow-card {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.animated-glow-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(
+    transparent, 
+    rgba(255, 255, 255, 0.1) 10%, 
+    var(--primary-red) 20%, 
+    transparent 30%, 
+    transparent 60%, 
+    rgba(255, 255, 255, 0.1) 70%, 
+    var(--primary-red) 80%, 
+    transparent 90%
+  );
+  animation: rotate-border 6s linear infinite;
+  z-index: -2;
+  opacity: 0.6;
+}
+
+.animated-glow-card.glow-cyan::before {
+  background: conic-gradient(
+    transparent, 
+    rgba(255, 255, 255, 0.1) 10%, 
+    var(--primary-cyan) 20%, 
+    transparent 30%, 
+    transparent 60%, 
+    rgba(255, 255, 255, 0.1) 70%, 
+    var(--primary-cyan) 80%, 
+    transparent 90%
+  );
+}
+
+.animated-glow-card.glow-dark-red::before {
+  background: conic-gradient(
+    transparent, 
+    rgba(255, 255, 255, 0.1) 10%, 
+    var(--primary-dark-red) 20%, 
+    transparent 30%, 
+    transparent 60%, 
+    rgba(255, 255, 255, 0.1) 70%, 
+    var(--primary-dark-red) 80%, 
+    transparent 90%
+  );
+}
+
+.animated-glow-card::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px; /* Border thickness */
+  background: rgba(10, 10, 11, 0.95);
+  border-radius: inherit;
+  z-index: -1;
+}
+
+@keyframes rotate-border {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Scrollbar Styling */
@@ -141,13 +222,18 @@ img {
 }
 
 .stg-section {
-  padding: 8rem 0;
+  padding: 4rem 0;
   position: relative;
+  /* content-visibility: auto defers rendering of off-screen sections */
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
+  /* contain: layout prevents section layouts from affecting each other */
+  contain: layout style;
 }
 
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
 }
 
 .section-header h2 {
@@ -157,27 +243,34 @@ img {
 
 @media (max-width: 768px) {
   .stg-section {
-    padding: 5rem 0;
+    padding: 2.5rem 0;
   }
 }
 
 .global-back-btn {
   position: absolute;
-  top: 7rem;
-  left: 5%;
-  padding: 0.8rem 2rem;
-  border-radius: 8px;
+  top: 6.5rem; /* Moved up slightly */
+  left: 3%; /* Moved further to the edge */
+  padding: 0.5rem 1.2rem; /* Reduced from 0.8rem 2rem */
+  border-radius: 6px;
   border: 1px solid var(--primary-red) !important;
   color: var(--primary-red) !important;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
   font-weight: 700;
+  font-size: 0.75rem; /* Reduced font size */
   transition: all 0.3s ease;
   z-index: 100;
   cursor: pointer;
   background: var(--bg-card);
   backdrop-filter: blur(12px);
+  letter-spacing: 1px;
+}
+
+.global-back-btn .arrow {
+  font-size: 1.1rem;
+  line-height: 1;
 }
 
 .global-back-btn:hover {
@@ -187,9 +280,27 @@ img {
 
 @media (max-width: 768px) {
   .global-back-btn {
-    top: 5rem;
-    left: 1rem;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.8rem;
+    display: none !important;
   }
+  
+  .global-back-btn .arrow {
+    font-size: 0.9rem;
+  }
+}
+
+/* Performance Utilities */
+.hardware-accelerated {
+  transform: translateZ(0);
+  will-change: transform, opacity;
+}
+
+.roman-serif {
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.is-scrolling * {
+  pointer-events: none !important;
 }
