@@ -36,8 +36,8 @@ const Footer = () => {
               <h4 className="heading-font">SUPPORT</h4>
               <ul>
                 <li><a href="https://wa.me/919025594503" target="_blank" rel="noopener noreferrer">Help Center</a></li>
-                <li><Link to="#">Terms of Service</Link></li>
-                <li><Link to="#">Privacy Policy</Link></li>
+                <li><Link to="/terms-of-service">Terms of Service</Link></li>
+                <li><Link to="/privacy-policy">Privacy Policy</Link></li>
                 <li><Link to="/admin">Admin Portal</Link></li>
               </ul>
             </div>
