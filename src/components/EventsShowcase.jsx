@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import './EventsShowcase.css';
 import jokerBg from '../assets/joker-phoenix-bg.jpg';
@@ -26,6 +27,7 @@ const renderRomanTitle = (title) => {
 };
 
 const EventsShowcase = () => {
+  const navigate = useNavigate();
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [eventsData, setEventsData] = useState([]);
@@ -37,11 +39,14 @@ const EventsShowcase = () => {
         const res = await fetch('https://api.codingboss.in/sports_app/get-event/', {
           headers: { 'ngrok-skip-browser-warning': 'true' }
         });
-        if (!res.ok) return;
+        if (!res.ok) {
+          setEventsData(loadEvents());
+          return;
+        }
         const data = await res.json();
         const rawEvents = Array.isArray(data) ? data : (data.results || []);
         if (!rawEvents.length) {
-          setEventsData([]);
+          setEventsData(loadEvents());
           return;
         }
 
@@ -62,21 +67,25 @@ const EventsShowcase = () => {
               pImage = `https://api.codingboss.in${pImage}`;
             }
           }
+          const eventTitle = formatRomanTitle(e.operationName || e.title || '');
+          const isOperation1 = eventTitle.endsWith('Ⅰ') || eventTitle.endsWith('I') || eventTitle.endsWith('1') || String(e.id) === '11' || String(e.id) === 'def_1';
+
           return {
             ...e,
-            title: formatRomanTitle(e.operationName || e.title || ''),
-            prizePool: e.price || e.prizePool || '',
+            title: eventTitle,
+            prizePool: isOperation1 ? '₹25,000' : (e.price || e.prizePool || ''),
             posterImage: pImage,
             status: e.status || 'COMPLETED',
             mode: e.mode || '',
             slots: e.slots || '',
-            entry: e.entry || ''
+            entry: isOperation1 ? '500' : (e.entry || '')
           };
         });
         
         setEventsData(sortEvents(mappedEvents));
       } catch (e) {
         console.error('Failed to fetch events from API:', e);
+        setEventsData(loadEvents());
       }
     };
     fetchEventsFromAPI();
@@ -214,10 +223,12 @@ const EventsShowcase = () => {
                     }}>
                       {renderRomanTitle(ev.title)}
                     </h3>
-                    <p className="role-red" style={{ color: themeColor }}>PRICE: {ev.prizePool || '10,000'}</p>
+                    <p className="role-red" style={{ color: themeColor }}>
+                      PRICE: {ev.prizePool || (ev.price ? (ev.price.startsWith('₹') ? ev.price : `₹${ev.price}`) : '₹15,000')}
+                    </p>
                     <p className="visionary-desc" style={{ marginBottom: '1rem', lineHeight: '1.6' }}>
                       <strong>Mode:</strong> {ev.mode || 'CLASSIC - SQUAD'}<br/>
-                      <strong>Slots:</strong> {ev.slots || '160'}<br/>
+                      <strong>Slots:</strong> {ev.slots || '500'}<br/>
                       <strong>Entry:</strong> {ev.entry || 'FREE'}
                     </p>
                     <button 
@@ -238,8 +249,12 @@ const EventsShowcase = () => {
                       onMouseOut={(e) => {
                         e.currentTarget.style.background = 'transparent';
                       }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        navigate('/checkout', { state: { event: ev } });
+                      }}
                     >
-                      {loadingDetailsId === (ev.id || ev.title) ? '⏳ LOADING...' : 'VIEW EVENT DETAILS'}
+                      REGISTER
                     </button>
                   </div>
                 </motion.div>

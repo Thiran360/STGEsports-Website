@@ -7,6 +7,7 @@ const LineupPage = React.lazy(() => import('./pages/LineupPage'));
 const EventsPage = React.lazy(() => import('./pages/EventsPage'));
 const PrivacyPolicy = React.lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = React.lazy(() => import('./pages/TermsOfService'));
+const PaymentPage = React.lazy(() => import('./pages/PaymentPage'));
 const AdminLogin = React.lazy(() => import('./pages/AdminLogin'));
 const AdminDashboard = React.lazy(() => import('./pages/AdminDashboard'));
 import Footer from './components/Footer';
@@ -48,6 +49,8 @@ function App() {
             <Route path="/about" element={<AboutPage />} />
             <Route path="/lineup" element={<LineupPage />} />
             <Route path="/events" element={<EventsPage />} />
+            <Route path="/checkout" element={<PaymentPage />} />
+            <Route path="/payment" element={<PaymentPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/terms-of-service" element={<TermsOfService />} />
             <Route path="/admin" element={<AdminLogin />} />

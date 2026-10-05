@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { FaUserShield, FaDatabase, FaExchangeAlt, FaLock, FaChild, FaEnvelope, FaFileAlt } from 'react-icons/fa';
 import STGWatermark from '../components/STGWatermark';
 import './LegalPages.css';
+import { FaMoneyBillWave } from "react-icons/fa";
 
 const PrivacyPolicy = () => {
   const navigate = useNavigate();
@@ -130,10 +131,26 @@ const PrivacyPolicy = () => {
           </div>
           <p>If you have any questions, concerns, or requests regarding this Privacy Policy or your personal data, please don't hesitate to reach out to our dedicated support team.</p>
           <div className="legal-contact-box">
-            <p><strong>Email:</strong> support@stgesports.com</p>
-            <p><strong>WhatsApp Support:</strong> <a href="https://wa.me/919025594503" target="_blank" rel="noopener noreferrer">+91 90255 94503</a></p>
+            <p><strong>Email:</strong>contact@stgesports.in</p>
+            <p><strong>WhatsApp Support:</strong> <a href="https://wa.me/918056823309" target="_blank" rel="noopener noreferrer">+91 8056823309</a></p>
           </div>
         </motion.section>
+      
+       <motion.section variants={fadeIn} className="legal-card">
+  <div className="legal-section-header">
+    <FaMoneyBillWave className="legal-section-icon" />
+    <h2>7. Refund Policy</h2>
+  </div>
+  <p>
+    If you are eligible for a refund, the refund amount will be
+    processed and sent to your original payment method within 24 hours.
+  </p>
+  <div className="legal-contact-box">
+    <p>
+      <strong>Refund Processing Time:</strong> Within 24 hours
+    </p>
+  </div>
+   </motion.section>
 
       </motion.div>
     </div>

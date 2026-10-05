@@ -12,7 +12,7 @@ export const DEFAULT_EVENTS = [
     series: "STG SERIES",
     season: "01",
     status: "COMPLETED",
-    prizePool: "₹10,000",
+    prizePool: "₹25,000",
     period: "JANUARY 2024",
     posterImage: stgSeason1,
     videoThumbnail: "https://img.youtube.com/vi/ahAsqomlDNw/hqdefault.jpg",
@@ -25,7 +25,7 @@ export const DEFAULT_EVENTS = [
     winners: ['GodLike', 'Team XSpark', 'Soul', 'Blind Esports', 'Gladiators'],
     slots: "160",
     mode: "CLASSIC - SQUAD",
-    entry: "FREE",
+    entry: "500",
     registrationDate: "0d 0h 0m 0s"
   },
   {
@@ -48,7 +48,7 @@ export const DEFAULT_EVENTS = [
     winners: ['Global Esports', 'Revenant', 'Entity', 'Enigma Gaming', 'Hydra'],
     slots: "160",
     mode: "CLASSIC - SQUAD",
-    entry: "FREE",
+    entry: "500",
     registrationDate: "0d 0h 0m 0s"
   },
   {
@@ -69,7 +69,7 @@ export const DEFAULT_EVENTS = [
     themeGlow: "rgba(255, 215, 0, 0.4)",
     themeBorder: "rgba(255, 215, 0, 0.25)",
     winners: ['Carnival Gaming', 'Orangutan', 'Medal Esports', 'Gladiators', '8Bit'],
-    slots: "160",
+    slots: "500",
     mode: "CLASSIC - SQUAD",
     entry: "FREE",
     registrationDate: "0d 0h 0m 0s"
